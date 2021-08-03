@@ -1,1 +1,0 @@
-print("Moje změna")
