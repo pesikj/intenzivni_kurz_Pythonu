@@ -16,17 +16,24 @@ class Zamestnanec:
         self.dny_dovolene = 25
         self.zkusebni_doba = zkusebni_doba
 class Manazer(Zamestnanec):
+    def pridej_podrizeneho(self, podrizeny):
+        self.podrizeni.append(podrizeny)
+    def zjisti_podrizene(self):
+        podrizeni = "Podřízení jsou: "
+        for polozka in self.podrizeni:
+            podrizeni = podrizeni + polozka.jmeno + ", "
+        return podrizeni
     def __str__(self):
         text = super().__str__()
-        text = text + f" Má {self.pocet_podrizenych} podřízených."
+        text = text + f" Má {len(self.podrizeni)} podřízených."
         return text
-    def __init__(self, jmeno, pozice, zkusebni_doba, pocet_podrizenych):
+    def __init__(self, jmeno, pozice, zkusebni_doba):
         super().__init__(jmeno, pozice, zkusebni_doba)
-        self.pocet_podrizenych = pocet_podrizenych
+        self.podrizeni = []
 frantisek = Zamestnanec(pozice="konstruktér", jmeno="František Novák", zkusebni_doba=True)
-#klara = Zamestnanec("Klára Nová", "konstruktérka", "123", "KN", 30, False)
-marian = Manazer("Marian Přísný", "vedoucí KO", False, 2)
-print(marian.vybrat_dovolenou(20))
-print(marian.vybrat_dovolenou(10))
-print(marian)
+klara = Zamestnanec("Klára Nová", "konstruktérka", False)
+marian = Manazer("Marian Přísný", "vedoucí KO", False)
+marian.pridej_podrizeneho(frantisek)
+marian.pridej_podrizeneho(klara)
+print(marian.zjisti_podrizene())
 
